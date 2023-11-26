@@ -10,8 +10,6 @@ public class ProductServiceImplTest {
 
 	@Test
 	public void testSearchAllLowStockProducts() {
-		//fail("Not yet implemented");
-		
 		ProductServiceImpl service = new ProductServiceImpl();
     		int threshold = 5; // Example threshold
     		List<ProductBean> lowStockProducts = service.searchAllLowStockProducts(threshold);
@@ -23,9 +21,7 @@ public class ProductServiceImplTest {
 	}
 
 	@Test
-	public void testGetAllLowStockProductsByType() {
-		//fail("Not yet implemented");
-		
+	public void testGetAllLowStockProductsByType() {		
 		ProductServiceImpl service = new ProductServiceImpl();
         int threshold = 10; // Example threshold
         String type = "fan"; // Example product type
@@ -41,8 +37,6 @@ public class ProductServiceImplTest {
 
 	@Test
 	public void testGetUsedLowCostProducts() {
-		//fail("Not yet implemented");
-		
 		ProductServiceImpl service = new ProductServiceImpl();
         double maxCost = 1300.00; // Example max cost
 
