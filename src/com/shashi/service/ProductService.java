@@ -38,6 +38,6 @@ public interface ProductService {
 
 	//START - ADDED BY ELISE
 	public List<ProductBean> getDiscountedProducts();
-	public List<ProductBean> getUsedLowCostProducts();
+	public List<ProductBean> getUsedLowCostProducts(int maxCost);
 	//END
 }
