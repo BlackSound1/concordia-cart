@@ -12,13 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import com.shashi.service.impl.ProductServiceImpl;
 
-@WebServlet("/RemoveProductSrv")
-public class RemoveProductSrv extends HttpServlet {
+@WebServlet("/ShowDiscountedSrv")
+public class ShowDiscountedSrv extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public RemoveProductSrv() {
+	public ShowDiscountedSrv() {
 		super();
-
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,13 +42,14 @@ public class RemoveProductSrv extends HttpServlet {
 		// login checked
 
 		ProductServiceImpl product = new ProductServiceImpl();
-
-    int maxCost = 1;
-
-		String status = product.getUsedLowCostProducts(maxCost);
-
-		RequestDispatcher rd = request.getRequestDispatcher("getUsedLowCostProducts.jsp?message=" + status);
-
+		List<ProductBean> discProductList = product.getDiscountedProducts(prodId);
+	    	
+		String status = "Discounted products found!";
+	    	if(discProductList.isEmpty()) {
+	    	  status = "Discounted products NOT found!";
+	 	}
+				
+		RequestDispatcher rd = request.getRequestDispatcher("getDiscountedProducts.jsp?message=" + status);
 		rd.forward(request, response);
 
 	}
