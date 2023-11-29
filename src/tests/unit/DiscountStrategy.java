@@ -29,7 +29,7 @@ public class DiscountStrategy {
 		// Navigate to the home page
 		driver.get("http://localhost:8083/shopping-cart/index.jsp");
 		
-		// Get the number of BEST SELLING elements
+		// Get the number of Discount elements
 		List<WebElement> discountList = driver.findElements(By.id("suggested-discount"));
 		
 		// There should be 0 of them
@@ -55,7 +55,7 @@ public class DiscountStrategy {
 		// Actually log in
 		button.click();
 		
-		// Get the number of BEST SELLING elements
+		// Get the number of Discount elements
 		List<WebElement> discountList = driver.findElements(By.id("suggested-discount"));
 		
 		// There should be 0 of them
@@ -85,7 +85,7 @@ public class DiscountStrategy {
 		// Actually log in
 		button.click();
 		
-		// Get the number of BEST SELLING elements
+		// Get the number of Discount elements
 		List<WebElement> discountList = driver.findElements(By.id("suggested-discount"));
 		
 		// There should be 12 of them
