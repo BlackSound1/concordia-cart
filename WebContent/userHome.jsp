@@ -33,7 +33,7 @@
 		boolean mostFlag = false;
 		
 		List<ProductBean> usedLowCostProd = new ArrayList<ProductBean>();
-		usedLowCostProd = prodDao.getUsedLowCostProducts(200.0);
+		usedLowCostProd = prodDao.getUsedLowCostProducts(1300.0);
 		boolean usedFlag = false;
 	
 		String search = request.getParameter("search");
@@ -140,7 +140,7 @@
 						<br />
 					</div>
 				</div>
-				<% mostFlag = false; } %>
+				<% mostFlag = false; usedFlag = false; } %>
 			</div>
 		</div>
 		
