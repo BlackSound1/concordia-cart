@@ -734,7 +734,7 @@ public class ProductServiceImpl implements ProductService {
 
 		int threshold = 0;
 		try {
-			ps = con.prepareStatement("SELECT * FROM product WHERE amountSold >= (SELECT 0.8*AVG(amountSold) FROM product)");
+			ps = con.prepareStatement("SELECT * FROM product WHERE amountSold >= (SELECT 1.3*AVG(amountSold) FROM product)");
 
 			
 			rs = ps.executeQuery();
