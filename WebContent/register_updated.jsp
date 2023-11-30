@@ -94,7 +94,7 @@
 						<button type="Reset" class="btn btn-danger">Reset</button>
 					</div>
 					<div class="col-md-6">
-						<button type="submit" class="btn btn-success">Register</button>
+						<button type="submit" name="submit" class="btn btn-success">Register</button>
 					</div>
 				</div>
 			</form>

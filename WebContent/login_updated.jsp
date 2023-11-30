@@ -63,13 +63,14 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<button type="submit" class="btn btn-success">Login</button>
+						<button type="submit" class="btn btn-success">Login </button>
 					</div>
 				</div>
 			</form>
 
 		</div>
 	</div>
+	
 
 	<%@ include file="footer.html"%>
 

@@ -16,19 +16,21 @@ import org.junit.Test;
 
 
 public class RegisterWithoutPin {
-	
+	//declare webdriver
 	static WebDriver driver;
 	
 	@BeforeClass
 	public static void initDriver() {
-		// Web driver
+		
 		driver = new FirefoxDriver();
 		
 	}
 	
 	public void register() {
+		//go to registration page
 		driver.get("http://localhost:8080/shopping-cart/register.jsp");
 		
+		//declare form elements 
 		WebElement username = driver.findElement(By.name("username"));
 		WebElement email = driver.findElement(By.name("email"));
 		WebElement last = driver.findElement(By.name("last_name"));
@@ -37,12 +39,18 @@ public class RegisterWithoutPin {
 		WebElement confirm = driver.findElement(By.name("confirmPassword"));
 		WebElement submit = driver.findElement(By.name("submit"));
 		
+		//filling inputs 
 		username.sendKeys("guest");
 		last.sendKeys("test");
 		email.sendKeys("guest_test@gmail.com");
 		password.sendKeys("guest1");
 		confirm.sendKeys("guest1");
+		mobile.sendKeys("123-456-789");
 		submit.click();
+		
+		/**tests if after inputting and submitting the modified registration
+		the page redirects to the page which declares successful registration
+		**/
 		
 		assertEquals(driver.getCurrentUrl(),"http://localhost:8080/shopping-cart/RegisterSrv");
 
