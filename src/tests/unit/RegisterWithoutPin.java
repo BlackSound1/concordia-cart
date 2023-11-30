@@ -15,6 +15,7 @@ import org.junit.Test;
 
 
 
+
 public class RegisterWithoutPin {
 	//declare web driver
 	static WebDriver driver;

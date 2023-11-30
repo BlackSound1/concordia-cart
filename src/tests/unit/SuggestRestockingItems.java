@@ -25,6 +25,7 @@ public void SuggestRestockingItems() {
 	
 driver.get("http://localhost:8080/shopping-cart/login.jsp");
 		
+
 		// Declare web form elements
 		WebElement email = driver.findElement(By.id("email"));
 		WebElement password = driver.findElement(By.id("password"));
