@@ -98,11 +98,22 @@
 					int prodQuantity = item.getQuantity();
 
 					ProductBean product = new ProductServiceImpl().getProductDetails(prodId);
-
-					double currAmount = product.getProdPrice() * prodQuantity;
+					double currAmount;
+					
+					double newPrice = -1;
+					if (product.getDiscountPercent() > 0) {
+						
+						newPrice = 100 - product.getDiscountPercent();
+						newPrice /= 100;
+						newPrice *= product.getProdPrice();
+						newPrice = Math.round(newPrice);
+						currAmount = newPrice * prodQuantity;
+					} else {
+						currAmount = product.getProdPrice() * prodQuantity;
+					}		
 
 					totAmount += currAmount;
-
+					
 					if (prodQuantity > 0) {
 				%>
 
@@ -110,7 +121,19 @@
 					<td><img src="./ShowImage?pid=<%=product.getProdId()%>"
 						style="width: 50px; height: 50px;"></td>
 					<td><%=product.getProdName()%></td>
-					<td><%=product.getProdPrice()%></td>
+					
+					
+					<%
+					if (newPrice != -1) {
+						
+					%>
+					<td><%=newPrice %></td>
+					<%
+					} else {
+					%>
+					<td><%=product.getProdPrice() %></td>
+					<% } %>
+					
 					<td><form method="post" action="./UpdateToCart">
 							<input type="number" name="pqty" value="<%=prodQuantity%>"
 								style="max-width: 70px;" min="0"> <input type="hidden"
