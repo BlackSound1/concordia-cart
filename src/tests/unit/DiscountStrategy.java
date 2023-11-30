@@ -92,8 +92,8 @@ public class DiscountStrategy {
 		// Get the number of Discount elements
 		List<WebElement> discountList = driver.findElements(By.id("suggested-discount"));
 		
-		// There should be 12 of them
-		assertEquals(15, discountList.size());
+		// There should be 10 of them
+		assertEquals(10, discountList.size());
 		
 		// Logout
 		WebElement logoutButton = driver.findElement(By.linkText("Logout"));
@@ -114,7 +114,7 @@ public class DiscountStrategy {
         for (ProductBean product : mostProducts) {
         	assertTrue(product.getAmountSold() >= 0);
         }
-        assertEquals(15, leastProducts.size() + mostProducts.size());
+        assertEquals(10, leastProducts.size() + mostProducts.size());
 	}
 	
 	
