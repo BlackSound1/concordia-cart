@@ -8,7 +8,7 @@ import com.shashi.beans.ProductBean;
 public interface ProductService {
 
 	public String addProduct(String prodName, String prodType, String prodInfo, double prodPrice, int prodQuantity,
-			InputStream prodImage, int amountSold);
+			InputStream prodImage, int amountSold, int discountPrice);
 
 	public String addProduct(ProductBean product);
 
