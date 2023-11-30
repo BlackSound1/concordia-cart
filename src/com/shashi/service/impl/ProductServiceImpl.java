@@ -21,11 +21,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public String addProduct(String prodName, String prodType, String prodInfo, double prodPrice, int prodQuantity,
-			InputStream prodImage) {
+			InputStream prodImage, int amountSold, int discountPercent) {
 		String status = null;
 		String prodId = IDUtil.generateId();
 
-		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage);
+		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage, amountSold, discountPercent);
 
 		status = addProduct(product);
 
@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
 		PreparedStatement ps = null;
 
 		try {
-			ps = con.prepareStatement("insert into product values(?,?,?,?,?,?,?);");
+			ps = con.prepareStatement("insert into product values(?,?,?,?,?,?,?,?,?);");
 			ps.setString(1, product.getProdId());
 			ps.setString(2, product.getProdName());
 			ps.setString(3, product.getProdType());
@@ -52,6 +52,8 @@ public class ProductServiceImpl implements ProductService {
 			ps.setDouble(5, product.getProdPrice());
 			ps.setInt(6, product.getProdQuantity());
 			ps.setBlob(7, product.getProdImage());
+			ps.setInt(8, product.getAmountSold());
+			ps.setInt(10, product.getDiscountPercent());
 
 			int k = ps.executeUpdate();
 
@@ -210,7 +212,8 @@ public class ProductServiceImpl implements ProductService {
 				product.setProdPrice(rs.getDouble(5));
 				product.setProdQuantity(rs.getInt(6));
 				product.setProdImage(rs.getAsciiStream(7));
-
+				product.setAmountSold(rs.getInt(8));
+				product.setDiscountPercent(rs.getInt(10));
 				products.add(product);
 
 			}
@@ -367,6 +370,7 @@ public class ProductServiceImpl implements ProductService {
 				product.setProdPrice(rs.getDouble(5));
 				product.setProdQuantity(rs.getInt(6));
 				product.setProdImage(rs.getAsciiStream(7));
+				product.setDiscountPercent(rs.getInt(10));
 			}
 
 		} catch (SQLException e) {
@@ -397,14 +401,15 @@ public class ProductServiceImpl implements ProductService {
 		PreparedStatement ps = null;
 
 		try {
-			ps = con.prepareStatement("update product set pname=?,ptype=?,pinfo=?,pprice=?,pquantity=? where pid=?");
+			ps = con.prepareStatement("update product set pname=?,ptype=?,pinfo=?,pprice=?,pquantity=?,discountPercent=? where pid=?");
 
 			ps.setString(1, updatedProduct.getProdName());
 			ps.setString(2, updatedProduct.getProdType());
 			ps.setString(3, updatedProduct.getProdInfo());
 			ps.setDouble(4, updatedProduct.getProdPrice());
 			ps.setInt(5, updatedProduct.getProdQuantity());
-			ps.setString(6, prevProductId);
+			ps.setInt(6, updatedProduct.getDiscountPercent());
+			ps.setString(7, prevProductId);
 
 			int k = ps.executeUpdate();
 			// System.out.println("prevQuantity: "+prevQuantity);
@@ -461,6 +466,36 @@ public class ProductServiceImpl implements ProductService {
 
 			if (rs.next()) {
 				price = rs.getDouble("pprice");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		DBUtil.closeConnection(con);
+		DBUtil.closeConnection(ps);
+
+		return price;
+	}
+	
+	@Override
+	public double getProductDiscountPercent(String prodId) {
+		double price = 0;
+
+		Connection con = DBUtil.provideConnection();
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = con.prepareStatement("select * from product where pid=?");
+
+			ps.setString(1, prodId);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				price = rs.getInt("discountPercent");
 			}
 
 		} catch (SQLException e) {
@@ -733,7 +768,7 @@ public class ProductServiceImpl implements ProductService {
 
 		int threshold = 0;
 		try {
-			ps = con.prepareStatement("SELECT * FROM product WHERE amountSold >= (SELECT 0.8*AVG(amountSold) FROM product)");
+			ps = con.prepareStatement("SELECT * FROM product WHERE amountSold >= (SELECT 1.3*AVG(amountSold) FROM product)");
 
 			
 			rs = ps.executeQuery();
@@ -749,7 +784,7 @@ public class ProductServiceImpl implements ProductService {
 				product.setProdPrice(rs.getDouble(5));
 				product.setProdQuantity(rs.getInt(6));
 				product.setProdImage(rs.getAsciiStream(7));
-
+				
 				products.add(product);
 
 			}
@@ -764,4 +799,25 @@ public class ProductServiceImpl implements ProductService {
 
 		return products;
 	}
+
+
+	public double getSuggestedDiscount(double price, int amountSold) {
+				
+		return discountStrategy(price, amountSold);
+	}
+
+	@Override
+	public double discountStrategy(double price, int amountSold) {
+		double min = 0.1;
+		double max = 0.7;
+		double increment = 0.05;
+		
+		double discount = increment * amountSold;
+		double totalDiscount = Math.min(discount, max) * 100;
+
+		return Math.round(totalDiscount);
+	}
+
+
+	
 }

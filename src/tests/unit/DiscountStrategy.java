@@ -14,8 +14,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class SuggestPopularProducts {
-	
+import com.shashi.beans.ProductBean;
+import com.shashi.service.impl.ProductServiceImpl;
+
+public class DiscountStrategy {
+
 	static WebDriver driver;
 
 	@BeforeClass
@@ -26,19 +29,19 @@ public class SuggestPopularProducts {
 	}
 	
 	@Test
-	public void testBestSellingWhenLoggedOut() {
+	public void testSuggestedDiscountsWhenLoggedOut() {
 		// Navigate to the home page
 		driver.get("http://localhost:8080/shopping-cart/index.jsp");
 		
-		// Get the number of BEST SELLING elements
-		List<WebElement> bestSellingList = driver.findElements(By.id("best-selling"));
+		// Get the number of Discount elements
+		List<WebElement> discountList = driver.findElements(By.id("suggested-discount"));
 		
-		// There should be 7 of them
-		assertEquals(7, bestSellingList.size());
+		// There should be 0 of them
+		assertEquals(0, discountList.size());
 	}
 	
 	@Test
-	public void testBestSellingAsCustomer() {
+	public void testSuggestedDiscountsAsCustomer() {
 		// Navigate to Login page
 		driver.get("http://localhost:8080/shopping-cart/login.jsp");
 		
@@ -56,11 +59,11 @@ public class SuggestPopularProducts {
 		// Actually log in
 		button.click();
 		
-		// Get the number of BEST SELLING elements
-		List<WebElement> bestSellingList = driver.findElements(By.id("best-selling"));
+		// Get the number of Discount elements
+		List<WebElement> discountList = driver.findElements(By.id("suggested-discount"));
 		
-		// There should be 7 of them
-		assertEquals(7, bestSellingList.size());
+		// There should be 0 of them
+		assertEquals(0, discountList.size());
 		
 		// Logout
 		WebElement logoutButton = driver.findElement(By.linkText("Logout"));
@@ -68,7 +71,7 @@ public class SuggestPopularProducts {
 	}
 	
 	@Test
-	public void testSellingRankingAsAdmin() {
+	public void testGetSuggestedDiscounts() {
 		// Navigate to Login page
 		driver.get("http://localhost:8080/shopping-cart/login.jsp");
 		
@@ -86,24 +89,35 @@ public class SuggestPopularProducts {
 		// Actually log in
 		button.click();
 		
-		// Get the number of BEST SELLING elements
-		List<WebElement> bestSellingList = driver.findElements(By.id("best-selling"));
+		// Get the number of Discount elements
+		List<WebElement> discountList = driver.findElements(By.id("suggested-discount"));
 		
-		// There should be 7 of them
-		assertEquals(7, bestSellingList.size());
-		
-		// Get the number of LEAST SELLING elements
-		List<WebElement> leastSellingList = driver.findElements(By.id("least-selling"));
-		
-		// There should be 3 of them
-		assertEquals(3, leastSellingList.size());
+		// There should be 10 of them
+		assertEquals(10, discountList.size());
 		
 		// Logout
 		WebElement logoutButton = driver.findElement(By.linkText("Logout"));
 		logoutButton.click();
 	}
+	
+	@Test
+	public void testSuggestedDiscountVariableDependencies() {
 
+		ProductServiceImpl service = new ProductServiceImpl();
 
+        List<ProductBean> leastProducts = service.getLeastSellingProducts();
+        List<ProductBean> mostProducts = service.getMostSellingProducts();
+        
+        for (ProductBean product : leastProducts) {
+        	assertTrue(product.getAmountSold() >= 0);
+        }
+        for (ProductBean product : mostProducts) {
+        	assertTrue(product.getAmountSold() >= 0);
+        }
+        assertEquals(10, leastProducts.size() + mostProducts.size());
+	}
+	
+	
 	@AfterClass
 	public static void tearDownAfterClass() {
 		driver.quit();

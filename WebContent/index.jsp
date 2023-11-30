@@ -35,6 +35,10 @@
 		List<ProductBean> mostSellingProd = new ArrayList<ProductBean>();
 		mostSellingProd = prodDao.getMostSellingProducts();
 		boolean mostFlag = false;
+		
+		List<ProductBean> usedLowCostProd = new ArrayList<ProductBean>();
+		usedLowCostProd = prodDao.getUsedLowCostProducts(1300.0);
+		boolean usedFlag = false;
 	
 		String search = request.getParameter("search");
 		String type = request.getParameter("type");
@@ -65,12 +69,16 @@
 		<!-- Start of Product Items List -->
 		<div class="container">
 			<div class="row text-center">
-	
 				<%
 				for (ProductBean product : products) {
 					for (ProductBean mostProd : mostSellingProd) {
 						if (product.getProdId().equals(mostProd.getProdId()))	
 							mostFlag = true;
+					}
+					
+					for (ProductBean usedProd : usedLowCostProd) {
+						if (product.getProdId().equals(usedProd.getProdId()))	
+							usedFlag = true;
 					}
 					
 					int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId());
@@ -84,6 +92,18 @@
 						<p id="best-selling" style="padding: 0 0.5em 0 0.5em; color: #000000; font-weight: bold;">BEST SELLING!</p>
 						<%
 							} 
+						%>
+						
+						<% if (usedFlag) { %>
+							<p id="used" style="padding: 0 0.5em 0 0.5em; color: black; font-weight: bold;">Used, Low Cost!</p>
+						<% } %>
+						
+						<%
+							if (product.getDiscountPercent() > 0) {
+						%>
+						<p id="discount-percentage" style="padding: 0 0.5em 0 0.5em; color: #000000; font-weight: bold;">ON DISCOUNT <%=product.getDiscountPercent() %>% OFF!</p>
+						<%
+							}
 						%>
 
 						<img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product" style="height: 150px; max-width: 180px">
@@ -131,7 +151,7 @@
 						<br />
 					</div>
 				</div>
-				<% mostFlag = false; } %>
+				<% mostFlag = false; usedFlag = false; } %>
 			</div>
 		</div>
 

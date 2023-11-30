@@ -14,31 +14,31 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class SuggestPopularProducts {
+public class GetUsedLowCostProducts {
 	
 	static WebDriver driver;
 
 	@BeforeClass
-	public static void initDriver() {
+	public static void setUpBeforeClass() {
 		// Create the web driver that will be used for testing, and set it to wait 500ms on page load, just in case
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 	}
 	
 	@Test
-	public void testBestSellingWhenLoggedOut() {
+	public void testUsedLowCostWhenLoggedOut() {
 		// Navigate to the home page
 		driver.get("http://localhost:8080/shopping-cart/index.jsp");
 		
-		// Get the number of BEST SELLING elements
-		List<WebElement> bestSellingList = driver.findElements(By.id("best-selling"));
+		// Get the number of USED, LOW COST elements
+		List<WebElement> usedLowCostList = driver.findElements(By.id("used"));
 		
-		// There should be 7 of them
-		assertEquals(7, bestSellingList.size());
+		// There should be 6 of them
+		assertEquals(6, usedLowCostList.size());
 	}
 	
 	@Test
-	public void testBestSellingAsCustomer() {
+	public void testUsedLowCostAsCustomer() {
 		// Navigate to Login page
 		driver.get("http://localhost:8080/shopping-cart/login.jsp");
 		
@@ -56,11 +56,11 @@ public class SuggestPopularProducts {
 		// Actually log in
 		button.click();
 		
-		// Get the number of BEST SELLING elements
-		List<WebElement> bestSellingList = driver.findElements(By.id("best-selling"));
+		// Get the number of USED, LOW COST elements
+		List<WebElement> usedLowCostList = driver.findElements(By.id("used"));
 		
-		// There should be 7 of them
-		assertEquals(7, bestSellingList.size());
+		// There should be 6 of them
+		assertEquals(6, usedLowCostList.size());
 		
 		// Logout
 		WebElement logoutButton = driver.findElement(By.linkText("Logout"));
@@ -68,7 +68,7 @@ public class SuggestPopularProducts {
 	}
 	
 	@Test
-	public void testSellingRankingAsAdmin() {
+	public void testUsedLowCostAsAdmin() {
 		// Navigate to Login page
 		driver.get("http://localhost:8080/shopping-cart/login.jsp");
 		
@@ -86,23 +86,16 @@ public class SuggestPopularProducts {
 		// Actually log in
 		button.click();
 		
-		// Get the number of BEST SELLING elements
-		List<WebElement> bestSellingList = driver.findElements(By.id("best-selling"));
+		// Get the number of USED, LOW COST elements
+		List<WebElement> usedLowCostList = driver.findElements(By.id("used"));
 		
-		// There should be 7 of them
-		assertEquals(7, bestSellingList.size());
-		
-		// Get the number of LEAST SELLING elements
-		List<WebElement> leastSellingList = driver.findElements(By.id("least-selling"));
-		
-		// There should be 3 of them
-		assertEquals(3, leastSellingList.size());
+		// There should be none of them
+		assertTrue(usedLowCostList.isEmpty());
 		
 		// Logout
 		WebElement logoutButton = driver.findElement(By.linkText("Logout"));
 		logoutButton.click();
 	}
-
 
 	@AfterClass
 	public static void tearDownAfterClass() {

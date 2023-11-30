@@ -92,10 +92,20 @@
 							if (mostFlag == true) {	
 							%>
 							<p id="best-selling" style="padding: 0 0.5em 0 0.5em; color: #000000; font-weight: bold;">Selling Rank: Best</p>
+							<p id="suggested-discount" style="padding: 0 0.5em 0 0.5em; color: #000000; font-weight: bold;">Suggested Discount: <%=prodDao.getSuggestedDiscount(product.getProdPrice(), product.getAmountSold()) %>%</p>
 							<%
 								} else if (leastFlag == true) {
 							%>
 							<p id="least-selling" style="padding: 0 0.5em 0 0.5em; color: #000000; font-weight: bold;">Selling Rank: Least</p>
+							<p id="suggested-discount" style="padding: 0 0.5em 0 0.5em; color: #000000; font-weight: bold;">Suggested Discount: <%=prodDao.getSuggestedDiscount(product.getProdPrice(), product.getAmountSold()) %>%</p>
+							<%
+								}
+							%>
+							
+							<%
+							if (product.getDiscountPercent() > 0) {
+							%>
+							<p id="discount-percentage" style="padding: 0 0.5em 0 0.5em; color: #000000; font-weight: bold;">ON DISCOUNT <%=product.getDiscountPercent() %>% OFF!</p>
 							<%
 								}
 							%>
