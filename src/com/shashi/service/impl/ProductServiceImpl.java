@@ -21,11 +21,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public String addProduct(String prodName, String prodType, String prodInfo, double prodPrice, int prodQuantity,
-			InputStream prodImage) {
+			InputStream prodImage, int amountSold) {
 		String status = null;
 		String prodId = IDUtil.generateId();
 
-		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage);
+		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage, amountSold);
 
 		status = addProduct(product);
 
@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
 		PreparedStatement ps = null;
 
 		try {
-			ps = con.prepareStatement("insert into product values(?,?,?,?,?,?,?);");
+			ps = con.prepareStatement("insert into product values(?,?,?,?,?,?,?,?);");
 			ps.setString(1, product.getProdId());
 			ps.setString(2, product.getProdName());
 			ps.setString(3, product.getProdType());
@@ -52,6 +52,7 @@ public class ProductServiceImpl implements ProductService {
 			ps.setDouble(5, product.getProdPrice());
 			ps.setInt(6, product.getProdQuantity());
 			ps.setBlob(7, product.getProdImage());
+			ps.setInt(8, product.getAmountSold());
 
 			int k = ps.executeUpdate();
 
@@ -210,7 +211,7 @@ public class ProductServiceImpl implements ProductService {
 				product.setProdPrice(rs.getDouble(5));
 				product.setProdQuantity(rs.getInt(6));
 				product.setProdImage(rs.getAsciiStream(7));
-
+				product.setAmountSold(rs.getInt(8));
 				products.add(product);
 
 			}
@@ -749,7 +750,7 @@ public class ProductServiceImpl implements ProductService {
 				product.setProdPrice(rs.getDouble(5));
 				product.setProdQuantity(rs.getInt(6));
 				product.setProdImage(rs.getAsciiStream(7));
-
+				
 				products.add(product);
 
 			}
@@ -764,4 +765,25 @@ public class ProductServiceImpl implements ProductService {
 
 		return products;
 	}
+
+
+	public double getSuggestedDiscount(double price, int amountSold) {
+				
+		return discountStrategy(price, amountSold);
+	}
+
+	@Override
+	public double discountStrategy(double price, int amountSold) {
+		double min = 0.1;
+		double max = 0.7;
+		double increment = 0.05;
+		
+		double discount = increment * amountSold;
+		double totalDiscount = Math.min(discount, max) * 100;
+
+		return Math.round(totalDiscount);
+	}
+
+
+	
 }
