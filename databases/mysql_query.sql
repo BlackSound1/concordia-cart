@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `shopping-cart`.`product` (
   `image` LONGBLOB NULL DEFAULT NULL,
   `amountSold` INT NULL DEFAULT 0,
   `isUsed` Boolean, 
-  `discountPercent` INT NULL DEFAULT NULL,
+  `discountPercent` INT NULL DEFAULT 0,
   PRIMARY KEY (`pid`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
