@@ -478,6 +478,36 @@ public class ProductServiceImpl implements ProductService {
 
 		return price;
 	}
+	
+	@Override
+	public double getProductDiscountPercent(String prodId) {
+		double price = 0;
+
+		Connection con = DBUtil.provideConnection();
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = con.prepareStatement("select * from product where pid=?");
+
+			ps.setString(1, prodId);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				price = rs.getInt("discountPercent");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		DBUtil.closeConnection(con);
+		DBUtil.closeConnection(ps);
+
+		return price;
+	}
 
 	@Override
 	public boolean sellNProduct(String prodId, int n) {

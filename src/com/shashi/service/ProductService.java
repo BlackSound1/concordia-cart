@@ -31,6 +31,8 @@ public interface ProductService {
 	public String updateProductWithoutImage(String prevProductId, ProductBean updatedProduct);
 
 	public double getProductPrice(String prodId);
+	
+	public double getProductDiscountPercent(String prodId);
 
 	public boolean sellNProduct(String prodId, int n);
 

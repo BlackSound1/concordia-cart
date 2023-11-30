@@ -37,8 +37,19 @@ public class OrderServiceImpl implements OrderService {
 		// "+transaction.getTransDateTime());
 
 		for (CartBean item : cartItems) {
-
-			double amount = new ProductServiceImpl().getProductPrice(item.getProdId()) * item.getQuantity();
+			
+			int discountPercent = (int) new ProductServiceImpl().getProductDiscountPercent(item.getProdId());
+			
+			
+			double price = new ProductServiceImpl().getProductPrice(item.getProdId());
+			
+			
+			double amount = 0;
+			amount = 100 - discountPercent;
+			amount /= 100;
+			amount *= price;
+			amount = Math.round(amount);
+			
 
 			OrderBean order = new OrderBean(transactionId, item.getProdId(), item.getQuantity(), amount);
 
