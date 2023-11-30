@@ -48,7 +48,8 @@ public class OrderServiceImpl implements OrderService {
 			amount = 100 - discountPercent;
 			amount /= 100;
 			amount *= price;
-			amount = Math.round(amount);
+			amount *= item.getQuantity();
+			amount = Math.round(amount) ;
 			
 
 			OrderBean order = new OrderBean(transactionId, item.getProdId(), item.getQuantity(), amount);
