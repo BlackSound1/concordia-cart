@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.time.Duration;
 import java.util.List;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -12,6 +13,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+
+import com.shashi.beans.ProductBean;
+import com.shashi.service.impl.ProductServiceImpl;
 
 public class DiscountStrategy {
 
@@ -25,9 +29,9 @@ public class DiscountStrategy {
 	}
 	
 	@Test
-	public void testBestSellingWhenLoggedOut() {
+	public void testSuggestedDiscountsWhenLoggedOut() {
 		// Navigate to the home page
-		driver.get("http://localhost:8083/shopping-cart/index.jsp");
+		driver.get("http://localhost:8080/shopping-cart/index.jsp");
 		
 		// Get the number of Discount elements
 		List<WebElement> discountList = driver.findElements(By.id("suggested-discount"));
@@ -37,9 +41,9 @@ public class DiscountStrategy {
 	}
 	
 	@Test
-	public void testBestSellingAsCustomer() {
+	public void testSuggestedDiscountsAsCustomer() {
 		// Navigate to Login page
-		driver.get("http://localhost:8083/shopping-cart/login.jsp");
+		driver.get("http://localhost:8080/shopping-cart/login.jsp");
 		
 		// Get the various Login elements to manipulate
 		WebElement email = driver.findElement(By.id("email"));
@@ -69,7 +73,7 @@ public class DiscountStrategy {
 	@Test
 	public void testGetSuggestedDiscounts() {
 		// Navigate to Login page
-		driver.get("http://localhost:8083/shopping-cart/login.jsp");
+		driver.get("http://localhost:8080/shopping-cart/login.jsp");
 		
 		// Get the various Login elements to manipulate
 		WebElement email = driver.findElement(By.id("email"));
@@ -94,5 +98,28 @@ public class DiscountStrategy {
 		// Logout
 		WebElement logoutButton = driver.findElement(By.linkText("Logout"));
 		logoutButton.click();
+	}
+	
+	@Test
+	public void testSuggestedDiscountVariableDependencies() {
+
+		ProductServiceImpl service = new ProductServiceImpl();
+
+        List<ProductBean> leastProducts = service.getLeastSellingProducts();
+        List<ProductBean> mostProducts = service.getMostSellingProducts();
+        
+        for (ProductBean product : leastProducts) {
+        	assertTrue(product.getAmountSold() >= 0);
+        }
+        for (ProductBean product : mostProducts) {
+        	assertTrue(product.getAmountSold() >= 0);
+        }
+        assertEquals(15, leastProducts.size() + mostProducts.size());
+	}
+	
+	
+	@AfterClass
+	public static void tearDownAfterClass() {
+		driver.quit();
 	}
 }
