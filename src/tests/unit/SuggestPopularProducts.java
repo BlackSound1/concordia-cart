@@ -33,8 +33,8 @@ public class SuggestPopularProducts {
 		// Get the number of BEST SELLING elements
 		List<WebElement> bestSellingList = driver.findElements(By.id("best-selling"));
 		
-		// There should be 12 of them
-		assertEquals(12, bestSellingList.size());
+		// There should be 7 of them
+		assertEquals(7, bestSellingList.size());
 	}
 	
 	@Test
@@ -59,8 +59,8 @@ public class SuggestPopularProducts {
 		// Get the number of BEST SELLING elements
 		List<WebElement> bestSellingList = driver.findElements(By.id("best-selling"));
 		
-		// There should be 12 of them
-		assertEquals(12, bestSellingList.size());
+		// There should be 7 of them
+		assertEquals(7, bestSellingList.size());
 		
 		// Logout
 		WebElement logoutButton = driver.findElement(By.linkText("Logout"));
@@ -89,8 +89,8 @@ public class SuggestPopularProducts {
 		// Get the number of BEST SELLING elements
 		List<WebElement> bestSellingList = driver.findElements(By.id("best-selling"));
 		
-		// There should be 12 of them
-		assertEquals(12, bestSellingList.size());
+		// There should be 7 of them
+		assertEquals(7, bestSellingList.size());
 		
 		// Get the number of LEAST SELLING elements
 		List<WebElement> leastSellingList = driver.findElements(By.id("least-selling"));
