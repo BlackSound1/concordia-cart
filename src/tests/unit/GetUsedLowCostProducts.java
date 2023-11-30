@@ -19,7 +19,7 @@ public class GetUsedLowCostProducts {
 	static WebDriver driver;
 
 	@BeforeClass
-	public static void setUpBeforeClass() {
+	public static void initDriver() {
 		// Create the web driver that will be used for testing, and set it to wait 500ms on page load, just in case
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
@@ -98,7 +98,7 @@ public class GetUsedLowCostProducts {
 	}
 
 	@AfterClass
-	public static void tearDownAfterClass() {
+	public static void closeDriver() {
 		driver.quit();
 	}
 }

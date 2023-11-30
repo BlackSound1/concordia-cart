@@ -7,17 +7,17 @@ import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.junit.Test;
 
-public class GetLowStockProducts {
+public class GetDiscountedProducts {
 	
 	static WebDriver driver;
-	
+
 	@BeforeClass
 	public static void initDriver() {
 		// Create the web driver that will be used for testing, and set it to wait 500ms on page load, just in case
@@ -26,19 +26,19 @@ public class GetLowStockProducts {
 	}
 	
 	@Test
-	public void testNoLowStockMesssageWhenLoggedOut() {
+	public void testDiscountNoticeWhenLoggedOut() {
 		// Navigate to the home page
 		driver.get("http://localhost:8080/shopping-cart/index.jsp");
 		
-		// Get the number of LOW STOCK elements
-		List<WebElement> lowStockList = driver.findElements(By.id("low-stock"));
+		// Get the number of DISCOUNTED elements
+		List<WebElement> discountList = driver.findElements(By.id("discount-percentage"));
 		
-		// There should be none of them
-		assertTrue(lowStockList.isEmpty());
+		// There should be 3 of them
+		assertEquals(3, discountList.size());
 	}
 	
 	@Test
-	public void testNoLowStockMesssageAsCustomer() {
+	public void testDiscountNoticeAsCustomer() {
 		// Navigate to Login page
 		driver.get("http://localhost:8080/shopping-cart/login.jsp");
 		
@@ -56,11 +56,11 @@ public class GetLowStockProducts {
 		// Actually log in
 		button.click();
 		
-		// Get a list of all LOW-STOCK elements.
-		List<WebElement> lowStockList = driver.findElements(By.id("low-stock"));
+		// Get the number of DISCOUNTED elements
+		List<WebElement> discountList = driver.findElements(By.id("discount-percentage"));
 		
-		// There should be none of them
-		assertTrue(lowStockList.isEmpty());
+		// There should be 3 of them
+		assertEquals(3, discountList.size());
 		
 		// Logout
 		WebElement logoutButton = driver.findElement(By.linkText("Logout"));
@@ -68,7 +68,7 @@ public class GetLowStockProducts {
 	}
 	
 	@Test
-	public void testTwoItemsAreLowStockAsAdmin() {
+	public void testDiscountNoticeAsAdmin() {
 		// Navigate to Login page
 		driver.get("http://localhost:8080/shopping-cart/login.jsp");
 		
@@ -86,27 +86,22 @@ public class GetLowStockProducts {
 		// Actually log in
 		button.click();
 		
-		// Get a list of all LOW-STOCK elements.
-		List<WebElement> lowStockList = driver.findElements(By.id("low-stock"));
+		// Get the number of DISCOUNTED elements
+		List<WebElement> discountList = driver.findElements(By.id("discount-percentage"));
 		
-		// There should be 2 of them 
-		assertTrue(lowStockList.size() == 2);
+		// There should be 3 of them
+		assertEquals(3, discountList.size());
 		
-		// Navigate to the Stock page by clicking the link
-		WebElement stockButton = driver.findElement(By.linkText("Stock"));
-		stockButton.click();
+		// Get the number of elements that have a DISCOUNT SUGGESTION
+		List<WebElement> suggestedDiscountList = driver.findElements(By.id("suggested-discount"));
 		
-		// Again, get the list of LOW STOCK elements.
-		lowStockList = driver.findElements(By.id("low-stock"));
-		
-		// There should still be 2 of them
-		assertEquals(2, lowStockList.size());
-		
+		// There should be 10 of them
+		assertEquals(10, suggestedDiscountList.size());
 		// Logout
 		WebElement logoutButton = driver.findElement(By.linkText("Logout"));
 		logoutButton.click();
 	}
-	
+
 	@AfterClass
 	public static void closeDriver() {
 		driver.quit();
