@@ -39,6 +39,8 @@
 				</div>
 				<div></div>
 				<div class="row">
+				
+				<!-- Updated label -->>
 					<div class="col-md-12 form-group">
 						<label for="last_name">Email</label> <input type="email"
 							placeholder="Enter Username" name="username" class="form-control"
