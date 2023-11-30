@@ -31,6 +31,10 @@
 		List<ProductBean> mostSellingProd = new ArrayList<ProductBean>();
 		mostSellingProd = prodDao.getMostSellingProducts();
 		boolean mostFlag = false;
+		
+		List<ProductBean> usedLowCostProd = new ArrayList<ProductBean>();
+		usedLowCostProd = prodDao.getUsedLowCostProducts(200.0);
+		boolean usedFlag = false;
 	
 		String search = request.getParameter("search");
 		String type = request.getParameter("type");
@@ -66,6 +70,12 @@
 						if (product.getProdId().equals(mostProd.getProdId()))	
 							mostFlag = true;
 					}
+					
+					for (ProductBean usedProd : usedLowCostProd) {
+						if (product.getProdId().equals(usedProd.getProdId()))	
+							usedFlag = true;
+					}
+					
 					int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId());
 				%>
 
@@ -79,6 +89,10 @@
 						<%
 							} 
 						%>
+						
+						<% if (usedFlag) { %>
+							<p id="used" style="padding: 0 0.5em 0 0.5em; color: black; font-weight: bold;">Used, Low Cost!</p>
+						<% } %>
 						
 						<img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product" style="height: 150px; max-width: 180px">
 						
