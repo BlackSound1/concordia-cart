@@ -117,8 +117,8 @@
 							id="last_name" name="quantity" required>
 					</div>
 					<div class="col-md-6 form-group">
-						<label for="last_name">Discount Price</label> <input type="number"
-							value="<%=product.getDiscountPrice()%>"
+						<label for="last_name">Discount Percent</label> <input type="number"
+							value="<%=product.getDiscountPercent()%>"
 							placeholder="Enter Stock Quantity" class="form-control"
 							id="last_name" name="quantity" required>
 					</div>

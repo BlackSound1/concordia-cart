@@ -97,6 +97,10 @@
 						<% if (usedFlag) { %>
 							<p id="used" style="padding: 0 0.5em 0 0.5em; color: black; font-weight: bold;">Used, Low Cost!</p>
 						<% } %>
+						
+						
+						<p id="discount-percentage" style="padding: 0 0.5em 0 0.5em; color: #000000; font-weight: bold;">ON DISCOUNT: <%=product.getDiscountPercent() %></p>
+						
 
 						<img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product" style="height: 150px; max-width: 180px">
 						
