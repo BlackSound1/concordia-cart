@@ -21,11 +21,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public String addProduct(String prodName, String prodType, String prodInfo, double prodPrice, int prodQuantity,
-			InputStream prodImage, int amountSold, int discountPrice) {
+			InputStream prodImage, int amountSold, int discountPercent) {
 		String status = null;
 		String prodId = IDUtil.generateId();
 
-		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage, amountSold, discountPrice);
+		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage, amountSold, discountPercent);
 
 		status = addProduct(product);
 
@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
 			ps.setInt(6, product.getProdQuantity());
 			ps.setBlob(7, product.getProdImage());
 			ps.setInt(8, product.getAmountSold());
-			ps.setInt(9, product.getDiscountPrice());
+			ps.setInt(9, product.getDiscountPercent());
 
 			int k = ps.executeUpdate();
 
@@ -213,7 +213,7 @@ public class ProductServiceImpl implements ProductService {
 				product.setProdQuantity(rs.getInt(6));
 				product.setProdImage(rs.getAsciiStream(7));
 				product.setAmountSold(rs.getInt(8));
-				product.setDiscountPrice(rs.getInt(9));
+				product.setDiscountPercent(rs.getInt(9));
 				products.add(product);
 
 			}
