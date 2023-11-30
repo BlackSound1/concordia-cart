@@ -105,7 +105,7 @@ public class SuggestPopularProducts {
 
 
 	@AfterClass
-	public static void tearDownAfterClass() {
+	public static void closeDriver() {
 		driver.quit();
 	}
 }

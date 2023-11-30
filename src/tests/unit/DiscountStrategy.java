@@ -119,7 +119,7 @@ public class DiscountStrategy {
 	
 	
 	@AfterClass
-	public static void tearDownAfterClass() {
+	public static void closeDriver() {
 		driver.quit();
 	}
 }
