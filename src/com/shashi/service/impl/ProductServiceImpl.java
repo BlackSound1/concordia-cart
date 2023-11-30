@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
 			ps.setInt(6, product.getProdQuantity());
 			ps.setBlob(7, product.getProdImage());
 			ps.setInt(8, product.getAmountSold());
-			ps.setInt(9, product.getDiscountPercent());
+			ps.setInt(10, product.getDiscountPercent());
 
 			int k = ps.executeUpdate();
 
@@ -213,7 +213,7 @@ public class ProductServiceImpl implements ProductService {
 				product.setProdQuantity(rs.getInt(6));
 				product.setProdImage(rs.getAsciiStream(7));
 				product.setAmountSold(rs.getInt(8));
-				product.setDiscountPercent(rs.getInt(9));
+				product.setDiscountPercent(rs.getInt(10));
 				products.add(product);
 
 			}
