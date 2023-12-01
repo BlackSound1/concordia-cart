@@ -40,8 +40,8 @@
 				<div></div>
 				<div class="row">
 					<div class="col-md-12 form-group">
-						<label for="email">Username</label>
-						<input type="email" placeholder="Enter Username" name="username" class="form-control"
+						<label for="email">Email</label>
+						<input type="email" placeholder="Enter Email" name="username" class="form-control"
 							   id="email" required>
 					</div>
 				</div>
