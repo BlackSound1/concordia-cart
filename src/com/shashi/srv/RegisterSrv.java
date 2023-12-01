@@ -27,7 +27,11 @@ public class RegisterSrv extends HttpServlet {
 		Long mobileNo = Long.parseLong(request.getParameter("mobile"));
 		String emailId = request.getParameter("email");
 		String address = request.getParameter("address");
-		int pinCode = Integer.parseInt(request.getParameter("pincode"));
+		
+		
+		String pinCodeStr = request.getParameter("pincode");
+		int pinCode = (pinCodeStr != null && !pinCodeStr.isEmpty()) ? Integer.parseInt(pinCodeStr) : 000000;
+
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
 		String status = "";
