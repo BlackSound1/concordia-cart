@@ -1,8 +1,9 @@
 package tests.unit;
 import static org.junit.Assert.*;
 
-
+import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -21,6 +22,7 @@ public class RegisterWithoutPin {
 	@BeforeClass
 	public static void initDriver() {
 		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
 	}
 	
 	@Test
@@ -40,7 +42,6 @@ public class RegisterWithoutPin {
 		
 		//filling inputs 
 		username.sendKeys("guest");
-		//last.sendKeys("test");
 		email.sendKeys("guest_test@gmail.com");
 		password.sendKeys("guest1");
 		confirm.sendKeys("guest1");
