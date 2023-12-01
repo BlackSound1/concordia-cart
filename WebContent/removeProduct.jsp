@@ -57,6 +57,14 @@
 					}
 					%>
 				</div>
+				
+				<div class="row">
+                    <div class="col-md-12 form-group">
+                        <label for="confirm_prodid">Confirm Product Id</label>
+                        <input type="text" placeholder="Confirm Product Id" name="confirm_prodid" class="form-control" id="confirm_prodid" required>
+                    </div>
+                </div>
+                
 				<div></div>
 				<div class="row">
 					<div class="col-md-12 form-group">
