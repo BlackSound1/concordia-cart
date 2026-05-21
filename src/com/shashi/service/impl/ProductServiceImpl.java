@@ -801,23 +801,18 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 
+	//Our discount logic is set here
 	public double getSuggestedDiscount(double price, int amountSold) {
-				
-		return discountStrategy(price, amountSold);
-	}
 
-	@Override
-	public double discountStrategy(double price, int amountSold) {
-		double min = 0.1;
 		double max = 0.7;
 		double increment = 0.05;
-		
+
 		double discount = increment * amountSold;
+
+		//Returns the minimum amount between 0.7 and our made up value
 		double totalDiscount = Math.min(discount, max) * 100;
 
 		return Math.round(totalDiscount);
 	}
-
-
 	
 }
