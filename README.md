@@ -52,49 +52,49 @@ The user will get an email when:
 
 # Screenshots:
 - Home Page
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/6161fb90-ac83-445d-9fb2-56681f6a52b4)
+![Home Page](img/HomePage.png)
 
 - Login Page
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/c5451416-a669-4d76-ad84-9b8ea26bf6b4)
+![Login Page](img/LoginPage.png)
 
 - Register Page
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/19f06ec9-70aa-4700-8846-a2e6514d88c2)
+![Register Page](img/RegistrationPage.png)
 
 - Category Wise Product Filter
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/757e552c-1526-4142-869b-ffbf27a232e0)
+![Category Filter](img/CategoryFilter.png)
 
 - Cart Items
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/12963112-1276-49ca-8b9c-f3272c6b9b7b)
+![Cart Items](img/CartItems.png)
 
 - Credit Card Payment
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/990595ce-856c-46fe-8182-052a127d67b4)
+![Credit Card Payment](img/CreditCard.png)
 
 - Order Details & Status
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/db8b4511-cac0-41df-930a-ef3bdebe5c24)
+![Order Details](img/OrderDetails.png)
 
 - User Profile
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/aa22b0cd-726b-4e5c-85cd-5409b7fc5391)
+![User Profile](img/UserProfile.png)
 
 - Admin Home
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/0e909800-b9a2-4ece-884c-24cdc8ca931a)
+![Admin Home](img/AdminHome.png)
 
 - Stock Items
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/e94e519b-e65c-4f51-8b37-e1b555208f2d)
+![Stock Items](img/ItemStock.png)
 
 - Shipped Items
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/e34de1d9-91ae-4d3b-a38e-7d78aae1f410)
+![Shipped Items](img/ShippedOrders.png)
 
 - Recent Orders yet to be shipped
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/ed2df621-3256-41bd-8739-d3872474403c)
+![Unshipped Orders](img/UnshippedOrders.png)
 
 - Add Product to the stock
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/3f38b7cf-c120-4523-abec-cdb2238c17b0)
+![Add Product](img/AddProduct.png)
 
 - Remove Product from the stock
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/1e9c6565-6a14-4cb3-834e-8d7f5d273927)
+![Remove Product](img/RemoveProduct.png)
 
 - Update the stock item
-![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/1529a9a7-19a3-4381-ac58-29dbc55229d9)
+![Update Product](img/UpdateProduct.png)
 
 - Sample Email for order placed
 ![image](https://github.com/shashirajraja/shopping-cart/assets/34605595/cb60c616-c32c-42eb-abe5-494d8574c09a)
